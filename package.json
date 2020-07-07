@@ -1,0 +1,67 @@
+{
+  "name": "gluey-client",
+  "version": "0.0.1",
+  "description": "Desktop client for Gluey server",
+  "main": "src/main.ts",
+  "scripts": {
+    "postbuild": "copyfiles -u 1 src/**/*.html build/",
+    "docs": "typedoc --options typedoc.json",
+    "tslint": "tslint --config tslint.json --project tsconfig.json",
+    "tslint:fix": "tslint --config tslint.json --project tsconfig.json --fix",
+    "prettier": "prettier './**/*.ts' --debug-check",
+    "prettier:fix": "prettier './**/*.ts' --write",
+    "fix": "npm run prettier:fix && npm run tslint:fix",
+    "build": "rimraf build && tsc && npm run postbuild",
+    "start": "electron build/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capinemo/gluey-client.git"
+  },
+  "keywords": [
+    "gluey",
+    "client",
+    "desktop",
+    "electron"
+  ],
+  "author": "Rustem Sadykov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/capinemo/gluey-client/issues"
+  },
+  "homepage": "https://github.com/capinemo/gluey-client#readme",
+  "devDependencies": {
+    "electron": "9.0.5",
+    "typescript": "3.9.6",
+    "rimraf": "3.0.0",
+    "typedoc": "0.17.8",
+    "tslint": "6.1.2",
+    "tslint-config-airbnb-base": "0.3.0",
+    "nyc": "15.1.0",
+    "prettier": "2.0.5",
+    "copyfiles": "2.3.0",
+    "concurrently": "5.2.0"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "test/**/*"
+    ],
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "check-coverage": true
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": true,
+    "printWidth": 94,
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "singleQuote": true,
+    "quoteProps": "consistent"
+  }
+}
